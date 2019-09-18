@@ -1,0 +1,1188 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC",
+    "name": "NK CreateTask - Query - UpdateTask Automated",
+    "title": "NK CreateTask - Query - UpdateTask Automated",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "Custom Expired ",
+          "scope": "static",
+          "name": "8. Expiration Status on Expiration Date",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01A6HW5AWZMZO26NybFTDKU1x81MS5Rcllv",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "nkrishne@cisco.com",
+          "scope": "input",
+          "name": "Enter existing Email-Id for Task Assignee",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01A6HW5AWZBY72TBCYNaL1FbJ0SEMtj6vME",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "This is a Subject Line",
+          "scope": "static",
+          "name": "4. Subject Line",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01A6HW5AWZG362vsi8PMGyQ7aWDbRmx9713",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "This is a Approval Message from Task",
+          "scope": "static",
+          "name": "5. Approval Message",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01A6HW5AWZHZI1oANNq9uIVDow4foqZR9RM",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "nkrishne@cisco.com",
+          "scope": "input",
+          "name": "Enter existing Email-Id for Task Owner",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01A6HW5AWZJTU1wgfo0MxL3Q4f32XricNkS",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "nkrishne@cisco.com",
+          "scope": "input",
+          "name": "Enter existing Email-Id for Task Requestor",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01A6HW5AWZLGN5l7KHfDN10jf6FQrsT5ozF",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "description": "This WF does following operations and covers below actions:\nActions/Activities:\n1. Create Approval request\n2. Query Objects\n3. Update Task\n\nUpdate Tasks which are in below state:\nCreated \nUpdated\nDue Soon\nOverdue\nPending\nExpired -- Should Fail\nCompleted-- Should Fail\n\nIt also has different Conditions and Operators used in Query Objects actions",
+      "display_name": "NK CreateTask - Query - UpdateTask Automated",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01A6HW5IB924Q525y0tLWXAIUYLI9sa8gjQ",
+        "name": "Group",
+        "title": "Pre-Requisites used to create a Task",
+        "type": "logic.group",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Pre-Requisites used to create a Task",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01A6HW5TAHRMI6dVAGwEWZRbQgSUJMdXgbE",
+            "name": "Calculate Date",
+            "title": "Due Date = Present Date + 7 Days",
+            "type": "core.calculate_date",
+            "base_type": "activity",
+            "properties": {
+              "adjustment": 604800,
+              "continue_on_failure": false,
+              "description": "This is to calculate Due Date to set it to \"Present Date + 7 Days\".\nUsed to create Tasks ",
+              "display_name": "Due Date = Present Date + 7 Days",
+              "original_date": "$workflow.definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC.output.start_time$",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01A6HW62DI8SR4ILdZ7PPB3G5shCRPbDgLy",
+            "name": "Calculate Date",
+            "title": "Expired Date = Present Date + 10 Days",
+            "type": "core.calculate_date",
+            "base_type": "activity",
+            "properties": {
+              "adjustment": 864000,
+              "continue_on_failure": false,
+              "description": "This is to calculate Expired Date to set it to \"Present Date + 10 Days\".\nUsed to create Tasks ",
+              "display_name": "Expired Date = Present Date + 10 Days",
+              "original_date": "$workflow.definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC.output.start_time$",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01A6HW6BL58E74ntw3k5JHGnSai6R8jxkGP",
+        "name": "Parallel Block",
+        "title": "Parallel Block",
+        "type": "logic.parallel",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Parallel Block",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01A6HW6JY2XBI3r3ygt21nuOoIdzGdEMivW",
+            "name": "Parallel Branch",
+            "title": "Task State --\u003e Created, Updated, DueSoon, Overdue, Expired",
+            "type": "logic.parallel_block",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Task State --\u003e Created, Updated, DueSoon, Overdue, Expired",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01A6HW6T19G896q1eJA15UvEHCqawFbClM9",
+                "name": "Create Approval Request",
+                "title": "Create Approval Request Task from Automation WF - 1st Task",
+                "type": "task.approval_request",
+                "base_type": "activity",
+                "properties": {
+                  "approval_choices": [
+                    "Approve",
+                    "Reject",
+                    "Option1",
+                    "Option2"
+                  ],
+                  "assignees": [
+                    "$workflow.definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC.input.variable_workflow_01A6HW5AWZBY72TBCYNaL1FbJ0SEMtj6vME$"
+                  ],
+                  "continue_on_failure": false,
+                  "description": "This is used to update a task which is in status --  \nCREATED/ UPDATED/ DUE SOON/ OVERDUE/ EXPIRED",
+                  "display_name": "Create Approval Request Task from Automation WF - 1st Task",
+                  "due_date": {
+                    "is_relative_time": true,
+                    "is_specified_date": true,
+                    "relative_time": {
+                      "duration": 15,
+                      "time_units": "days"
+                    },
+                    "set_due_date": true,
+                    "specified_date": "$activity.01A65MMLDC2LC0WWzTxLAAITpMHQGjKUTIN.output.result$"
+                  },
+                  "expiration_date": {
+                    "is_relative_time": true,
+                    "is_specified_date": true,
+                    "relative_time": {
+                      "duration": 15,
+                      "time_units": "days"
+                    },
+                    "specified_date": "$activity.01A65MMVCTOHG323FtMl2lOLJurCOD4qxyz.output.result$"
+                  },
+                  "expiration_status": "$workflow.definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC.static.variable_workflow_01A6HW5AWZMZO26NybFTDKU1x81MS5Rcllv$",
+                  "minimum_approvals": 1,
+                  "priority": "high",
+                  "skip_execution": false,
+                  "subject_line": "$workflow.definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC.static.variable_workflow_01A6HW5AWZG362vsi8PMGyQ7aWDbRmx9713$",
+                  "task_message": "1. $workflow.definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC.static.variable_workflow_01A6HW5AWZHZI1oANNq9uIVDow4foqZR9RM$.\n\nTask Created on \"$workflow.definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC.output.start_time$\"",
+                  "task_owner": "$workflow.definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC.input.variable_workflow_01A6HW5AWZJTU1wgfo0MxL3Q4f32XricNkS$",
+                  "task_requestor": "$workflow.definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC.input.variable_workflow_01A6HW5AWZLGN5l7KHfDN10jf6FQrsT5ozF$"
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01A6HW79LBAHC1oDeo8TnoLb6ufIDLJmF22",
+                "name": "Group",
+                "title": "Update Task which is in \"CREATED\" state",
+                "type": "logic.group",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Update Task which is in \"CREATED\" state",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01A6HW7LJ28F52dbVsOdx1KXZ8bBBgYJN01",
+                    "name": "Query Object",
+                    "title": "Query Object -  Created",
+                    "type": "task.query_object",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "criteria": {
+                        "left_operand": {
+                          "left_operand": "$tasktype.task approval.output.task_id$",
+                          "operator": "eqi",
+                          "right_operand": "$activity.definition_activity_01A6HW6T19G896q1eJA15UvEHCqawFbClM9.output.task_id$"
+                        },
+                        "operator": "and",
+                        "right_operand": {
+                          "left_operand": "$tasktype.task approval.output.status.state$",
+                          "operator": "ne",
+                          "right_operand": "dummy value"
+                        }
+                      },
+                      "display_name": "Query Object -  Created",
+                      "query_object": {
+                        "query_task": true,
+                        "task_type": "task.approval"
+                      },
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01A6HW7VO84DH3zktPSnIBao1DNfP6bJx5S",
+                    "name": "Update Task",
+                    "title": "Update Task which is in CREATED state",
+                    "type": "task.update_task",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Update Task which is in CREATED state",
+                      "run_as": "nkrishne@cisco.com",
+                      "skip_execution": false,
+                      "task_id": "$activity.definition_activity_01A6HW7LJ28F52dbVsOdx1KXZ8bBBgYJN01.output.query_result[0].task_id$",
+                      "task_properties": [
+                        {
+                          "property_name": "approval_message",
+                          "value": "Updated task which was in CREATED state. \nUpdated after Querying for CREATED state activity."
+                        }
+                      ],
+                      "task_type": "task.approval"
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01A6HW88X3K6W68jBPpJyP5SbGms41oFEjj",
+                "name": "Group",
+                "title": "Update Task which is in \"UPDATED\" state",
+                "type": "logic.group",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Update Task which is in \"UPDATED\" state",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01A6HW8LIU6J24gTXY5sPhluF1oARqV4Zam",
+                    "name": "Query Object",
+                    "title": "Query Object -  Updated",
+                    "type": "task.query_object",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "criteria": {
+                        "left_operand": {
+                          "left_operand": "$tasktype.task approval.output.task_id$",
+                          "operator": "eqi",
+                          "right_operand": "$activity.definition_activity_01A6HW6T19G896q1eJA15UvEHCqawFbClM9.output.task_id$"
+                        },
+                        "operator": "and",
+                        "right_operand": {
+                          "left_operand": "$tasktype.task approval.output.status.state$",
+                          "operator": "eqi",
+                          "right_operand": "UpDaTeD"
+                        }
+                      },
+                      "display_name": "Query Object -  Updated",
+                      "query_object": {
+                        "query_task": true,
+                        "task_type": "task.approval"
+                      },
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01A6HW8VHNZ5R2u481FLsJLspVogcClnFz2",
+                    "name": "Update Task",
+                    "title": "Update Task which is in UPDATED state",
+                    "type": "task.update_task",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Update Task which is in UPDATED state",
+                      "run_as": "nkrishne@cisco.com",
+                      "skip_execution": false,
+                      "task_id": "$activity.definition_activity_01A6HW8LIU6J24gTXY5sPhluF1oARqV4Zam.output.query_result[0].task_id$",
+                      "task_properties": [
+                        {
+                          "property_name": "approval_message",
+                          "value": "Updated task which was in UPDATED state. \nUpdated after Querying for UPDATED state activity."
+                        }
+                      ],
+                      "task_type": "task.approval"
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01A6HW94KYD2U6DHWiClBjdOKGMOVOx3NCW",
+                "name": "Group",
+                "title": "Update Task which is in \"DUE SOON\" state",
+                "type": "logic.group",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Update Task which is in \"DUE SOON\" state",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01A6HW9HO2QV51pNSNEfIzdDxzY0mUHrr0s",
+                    "name": "Update Task",
+                    "title": "Update DUE DATE to bring task to DUE SOON state",
+                    "type": "task.update_task",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Update DUE DATE to bring task to DUE SOON state",
+                      "run_as": "nkrishne@cisco.com",
+                      "skip_execution": false,
+                      "task_id": "$activity.definition_activity_01A6HW6T19G896q1eJA15UvEHCqawFbClM9.output.task_id$",
+                      "task_properties": [
+                        {
+                          "property_name": "due_date",
+                          "value": {
+                            "is_relative_time": true,
+                            "relative_time": {
+                              "duration": 3,
+                              "time_units": "days"
+                            },
+                            "set_due_date": true
+                          }
+                        },
+                        {
+                          "property_name": "approval_message",
+                          "value": "Updated Due Date to bring task to DUE SOON state. \nUpdated after updating the task which was in UPDATED state."
+                        }
+                      ],
+                      "task_type": "task.approval"
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01A6HW9SJ74UE1mQfeSexWvZqftTn01pT8F",
+                    "name": "Query Object",
+                    "title": "Query Object -  Due Soon",
+                    "type": "task.query_object",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "criteria": {
+                        "left_operand": {
+                          "left_operand": "$tasktype.task approval.output.task_id$",
+                          "operator": "eqi",
+                          "right_operand": "$activity.definition_activity_01A6HW6T19G896q1eJA15UvEHCqawFbClM9.output.task_id$"
+                        },
+                        "operator": "and",
+                        "right_operand": {
+                          "left_operand": "$tasktype.task approval.output.status.state$",
+                          "operator": "mw",
+                          "right_operand": "due%"
+                        }
+                      },
+                      "display_name": "Query Object -  Due Soon",
+                      "query_object": {
+                        "query_task": true,
+                        "task_type": "task.approval"
+                      },
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01A6HWA12RITS3yafUzrehuhq8GxhIkZIEt",
+                    "name": "Update Task",
+                    "title": "Update Task which is in DUE SOON state",
+                    "type": "task.update_task",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Update Task which is in DUE SOON state",
+                      "run_as": "nkrishne@cisco.com",
+                      "skip_execution": false,
+                      "task_id": "$activity.definition_activity_01A6HW9SJ74UE1mQfeSexWvZqftTn01pT8F.output.query_result[0].task_id$",
+                      "task_properties": [
+                        {
+                          "property_name": "approval_message",
+                          "value": "Updated task which was in DUE SOON state. \nUpdated after Querying for DUE SOON state activity."
+                        }
+                      ],
+                      "task_type": "task.approval"
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01A6HWA9I5R0V4lIeX2BRoeI2HJeZqL00d0",
+                    "name": "Sleep",
+                    "title": "Sleep 2 Sec - Time to update the status",
+                    "type": "core.sleep",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Sleep 2 Sec - Time to update the status",
+                      "skip_execution": false,
+                      "sleep_interval": 2
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01A6HWAGYFV2C61A3pAVvoMjAUP42KlUrlI",
+                    "name": "Query Object",
+                    "title": "Query Object - To check if the status still remains in Due Soon",
+                    "type": "task.query_object",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "criteria": {
+                        "left_operand": {
+                          "left_operand": "$tasktype.task approval.output.task_id$",
+                          "operator": "eqi",
+                          "right_operand": "$activity.definition_activity_01A6HW6T19G896q1eJA15UvEHCqawFbClM9.output.task_id$"
+                        },
+                        "operator": "and",
+                        "right_operand": {
+                          "left_operand": "$tasktype.task approval.output.status.state$",
+                          "operator": "mw",
+                          "right_operand": "due%"
+                        }
+                      },
+                      "display_name": "Query Object - To check if the status still remains in Due Soon",
+                      "query_object": {
+                        "query_task": true,
+                        "task_type": "task.approval"
+                      },
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01A6HWAOT6RLY6V82245O87QukwP0x3mXSg",
+                "name": "Group",
+                "title": "Update Task which is in \"OVERDUE\" state",
+                "type": "logic.group",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Update Task which is in \"OVERDUE\" state",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01A6HWAZ3N6CV1s6G22yo92sdBZwYsGKZGj",
+                    "name": "Update Task",
+                    "title": "Update DUE DATE to bring task to OVERDUE state",
+                    "type": "task.update_task",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Update DUE DATE to bring task to OVERDUE state",
+                      "run_as": "nkrishne@cisco.com",
+                      "skip_execution": false,
+                      "task_id": "$activity.definition_activity_01A6HW6T19G896q1eJA15UvEHCqawFbClM9.output.task_id$",
+                      "task_properties": [
+                        {
+                          "property_name": "due_date",
+                          "value": {
+                            "is_relative_time": true,
+                            "relative_time": {
+                              "duration": 1,
+                              "time_units": "secs"
+                            },
+                            "set_due_date": true
+                          }
+                        },
+                        {
+                          "property_name": "approval_message",
+                          "value": "Updated Due Date to bring task to OVERDUE state. \nUpdated after Querying for DUESOON state activity."
+                        }
+                      ],
+                      "task_type": "task.approval"
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01A6HWB7AD4FL45OJgUk6zIXbdS95UQpq27",
+                    "name": "Sleep",
+                    "title": "Sleep - 2Sec for task to come to Overdue state",
+                    "type": "core.sleep",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Sleep - 2Sec for task to come to Overdue state",
+                      "skip_execution": false,
+                      "sleep_interval": 2
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01A6HWBDGIZXF32hqCRrG8uW5mVlMY7n9Xe",
+                    "name": "Query Object",
+                    "title": "Query Object -  Overdue",
+                    "type": "task.query_object",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "criteria": {
+                        "left_operand": {
+                          "left_operand": "$tasktype.task approval.output.task_id$",
+                          "operator": "eqi",
+                          "right_operand": "$activity.definition_activity_01A6HW6T19G896q1eJA15UvEHCqawFbClM9.output.task_id$"
+                        },
+                        "operator": "and",
+                        "right_operand": {
+                          "left_operand": "$tasktype.task approval.output.status.state$",
+                          "operator": "mregex",
+                          "right_operand": "over.*"
+                        }
+                      },
+                      "display_name": "Query Object -  Overdue",
+                      "query_object": {
+                        "query_task": true,
+                        "task_type": "task.approval"
+                      },
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01A6HWBP9CV6D1TH3FooSvqKxwq076K3cu9",
+                    "name": "Update Task",
+                    "title": "Update Task which is in OVERDUE state",
+                    "type": "task.update_task",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Update Task which is in OVERDUE state",
+                      "run_as": "nkrishne@cisco.com",
+                      "skip_execution": false,
+                      "task_id": "$activity.definition_activity_01A6HWBDGIZXF32hqCRrG8uW5mVlMY7n9Xe.output.query_result[0].task_id$",
+                      "task_properties": [
+                        {
+                          "property_name": "approval_message",
+                          "value": "Updated task which was in Overdue state. \nUpdated after Querying for OVERDUE state activity."
+                        }
+                      ],
+                      "task_type": "task.approval"
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01A6HWBXNT7EB23FIm8LYYMG5oBQLwAClgU",
+                    "name": "Sleep",
+                    "title": "Sleep 2 Sec - Time to update the status",
+                    "type": "core.sleep",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Sleep 2 Sec - Time to update the status",
+                      "skip_execution": false,
+                      "sleep_interval": 2
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01A6HWC3PA6367ULRFSN91G2Vi4Mdt7LrYY",
+                    "name": "Query Object",
+                    "title": "Query Object - To check if the status still remains in OVERDUE",
+                    "type": "task.query_object",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "criteria": {
+                        "left_operand": {
+                          "left_operand": "$tasktype.task approval.output.task_id$",
+                          "operator": "eqi",
+                          "right_operand": "$activity.definition_activity_01A6HW6T19G896q1eJA15UvEHCqawFbClM9.output.task_id$"
+                        },
+                        "operator": "and",
+                        "right_operand": {
+                          "left_operand": "$tasktype.task approval.output.status.state$",
+                          "operator": "mregex",
+                          "right_operand": "over.*"
+                        }
+                      },
+                      "display_name": "Query Object - To check if the status still remains in OVERDUE",
+                      "query_object": {
+                        "query_task": true,
+                        "task_type": "task.approval"
+                      },
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01A6HWCBB9GW26877d2wNSOzWxXKnQu4aA2",
+                "name": "Group",
+                "title": "Update Task which is in \"Expired\" state -- Should Fail",
+                "type": "logic.group",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "description": "This should fail since we should not allow any updates to the task which is on EXPIRED ",
+                  "display_name": "Update Task which is in \"Expired\" state -- Should Fail",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01A6HWCJ7TIJD14DG7ygmCGZMDrZv28cClG",
+                    "name": "Update Task",
+                    "title": "Update EXPIRED DATE to bring task to EXPIRED state",
+                    "type": "task.update_task",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Update EXPIRED DATE to bring task to EXPIRED state",
+                      "run_as": "nkrishne@cisco.com",
+                      "skip_execution": false,
+                      "task_id": "$activity.definition_activity_01A6HW6T19G896q1eJA15UvEHCqawFbClM9.output.task_id$",
+                      "task_properties": [
+                        {
+                          "property_name": "expiration_date",
+                          "value": {
+                            "is_relative_time": true,
+                            "relative_time": {
+                              "duration": 3,
+                              "time_units": "secs"
+                            }
+                          }
+                        },
+                        {
+                          "property_name": "approval_message",
+                          "value": "Updated Expiry Date to bring task to Expired state. \nUpdated after Querying for OVERDUE state activity."
+                        }
+                      ],
+                      "task_type": "task.approval"
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01A6HWCQXPPNH3glUlNwikUVeynYK7mddom",
+                    "name": "Sleep",
+                    "title": "Sleep 5sec for the status to update",
+                    "type": "core.sleep",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Sleep 5sec for the status to update",
+                      "skip_execution": false,
+                      "sleep_interval": 5
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01A6HWCWQ7Z9C2rxkEUy77ydO4PoLxbDWhf",
+                    "name": "Query Object",
+                    "title": "Query Object -  Expired",
+                    "type": "task.query_object",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "criteria": {
+                        "left_operand": {
+                          "left_operand": "$tasktype.task approval.output.task_id$",
+                          "operator": "eqi",
+                          "right_operand": "$activity.definition_activity_01A6HW6T19G896q1eJA15UvEHCqawFbClM9.output.task_id$"
+                        },
+                        "operator": "and",
+                        "right_operand": {
+                          "left_operand": "$tasktype.task approval.output.status.state$",
+                          "operator": "eqi",
+                          "right_operand": "expired"
+                        }
+                      },
+                      "display_name": "Query Object -  Expired",
+                      "query_object": {
+                        "query_task": true,
+                        "task_type": "task.approval"
+                      },
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01A6HWD4RPHH063Z5EZ4gloNlACVOPKDqMG",
+                    "name": "Update Task",
+                    "title": "Update Task which is in Expired state - Should FAIL",
+                    "type": "task.update_task",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": true,
+                      "description": "This should fail since we should not allow any updates to the task which is on EXPIRED ",
+                      "display_name": "Update Task which is in Expired state - Should FAIL",
+                      "run_as": "nkrishne@cisco.com",
+                      "skip_execution": false,
+                      "task_id": "$activity.definition_activity_01A6HWCWQ7Z9C2rxkEUy77ydO4PoLxbDWhf.output.query_result[0].task_id$",
+                      "task_properties": [
+                        {
+                          "property_name": "approval_message",
+                          "value": "Trying to updated task which is in Expired state. \nUpdated after Querying for EXPIRED state activity."
+                        }
+                      ],
+                      "task_type": "task.approval"
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01A6HWDCHYUQF6O3jepwz2p73NFp5XB1hzM",
+            "name": "Parallel Branch",
+            "title": "Task State --\u003e Completed",
+            "type": "logic.parallel_block",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Task State --\u003e Completed",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01A6HWDIUSEPQ5VYdbpRWb9cIvRFwcGcC8o",
+                "name": "Create Approval Request",
+                "title": "Create Approval Request Task from Automation WF -  2nd Task",
+                "type": "task.approval_request",
+                "base_type": "activity",
+                "properties": {
+                  "approval_choices": [
+                    "Approve",
+                    "Reject",
+                    "Option1",
+                    "Option2"
+                  ],
+                  "assignees": [
+                    "$workflow.definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC.input.variable_workflow_01A6HW5AWZBY72TBCYNaL1FbJ0SEMtj6vME$"
+                  ],
+                  "continue_on_failure": false,
+                  "description": "This is used to update a task which is in status --  \nCOMPLETED",
+                  "display_name": "Create Approval Request Task from Automation WF -  2nd Task",
+                  "due_date": {
+                    "is_relative_time": true,
+                    "is_specified_date": true,
+                    "relative_time": {
+                      "duration": 15,
+                      "time_units": "days"
+                    },
+                    "set_due_date": true,
+                    "specified_date": "$activity.definition_activity_01A6HW5TAHRMI6dVAGwEWZRbQgSUJMdXgbE.output.result$"
+                  },
+                  "expiration_date": {
+                    "is_relative_time": true,
+                    "is_specified_date": true,
+                    "relative_time": {
+                      "duration": 15,
+                      "time_units": "days"
+                    },
+                    "specified_date": "$activity.01A65MMVCTOHG323FtMl2lOLJurCOD4qxyz.output.result$"
+                  },
+                  "expiration_status": "$workflow.definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC.static.variable_workflow_01A6HW5AWZMZO26NybFTDKU1x81MS5Rcllv$",
+                  "minimum_approvals": 1,
+                  "priority": "high",
+                  "skip_execution": false,
+                  "subject_line": "$workflow.definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC.static.variable_workflow_01A6HW5AWZG362vsi8PMGyQ7aWDbRmx9713$",
+                  "task_message": "1. $workflow.definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC.static.variable_workflow_01A6HW5AWZHZI1oANNq9uIVDow4foqZR9RM$.\n\nTask Created on \"$workflow.definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC.output.start_time$\"",
+                  "task_owner": "$workflow.definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC.input.variable_workflow_01A6HW5AWZJTU1wgfo0MxL3Q4f32XricNkS$",
+                  "task_requestor": "$workflow.definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC.input.variable_workflow_01A6HW5AWZLGN5l7KHfDN10jf6FQrsT5ozF$"
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01A6HWDVMO2E933E79ekGlTh7HIPkPifcUk",
+                "name": "Generic CCS API Request",
+                "title": "Approve the Task to make it Complete",
+                "type": "ccs.api_request",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "api_body": "{\n  \"message\": \"Approve Selected from Automation\",\n  \"response\": \"Approve\"\n}",
+                  "api_call_method": "POST",
+                  "continue_on_failure": false,
+                  "display_name": "Approve the Task to make it Complete",
+                  "relative_url": "be-console/api/v1/tasks/$activity.definition_activity_01A6HWDIUSEPQ5VYdbpRWb9cIvRFwcGcC8o.output.task_id$/action",
+                  "runtime_user": {
+                    "override_target_runtime_user": false,
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "override_workflow_target": true,
+                    "target_id": "definition_target_01f9IQgvQRJv3tvlqwR145Bbrye0toH0Q"
+                  }
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01A6HWE3QNWQG63b5pkFyDWpRRvL9JVAMWQ",
+                "name": "Group",
+                "title": "Update Task which is in \"COMPLETED\" state -- Should Fail",
+                "type": "logic.group",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Update Task which is in \"COMPLETED\" state -- Should Fail",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01A6HWECEIC643tTG1sjkhHS5GQ4DS7Aqly",
+                    "name": "Query Object",
+                    "title": "Query Object -- Completed",
+                    "type": "task.query_object",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "criteria": {
+                        "left_operand": {
+                          "left_operand": {
+                            "left_operand": "$tasktype.task approval.output.task_id$",
+                            "operator": "eq",
+                            "right_operand": "$activity.definition_activity_01A6HWDIUSEPQ5VYdbpRWb9cIvRFwcGcC8o.output.task_id$"
+                          },
+                          "operator": "and",
+                          "right_operand": {
+                            "left_operand": "$tasktype.task approval.output.status.state$",
+                            "operator": "eq",
+                            "right_operand": "completed"
+                          }
+                        },
+                        "operator": "or",
+                        "right_operand": {
+                          "left_operand": "$tasktype.task approval.output.type$",
+                          "operator": "nmw",
+                          "right_operand": "task.approval"
+                        }
+                      },
+                      "display_name": "Query Object -- Completed",
+                      "query_object": {
+                        "query_task": true,
+                        "task_type": "task.approval"
+                      },
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01A6HWEMJS30V0elByY8PQyHXnOxlZd1GZE",
+                    "name": "Update Task",
+                    "title": "Update Task which is in COMPLETED state - Should Fail",
+                    "type": "task.update_task",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": true,
+                      "description": "This should fail since we should not allow any updates to the task which is on COMPLETED ",
+                      "display_name": "Update Task which is in COMPLETED state - Should Fail",
+                      "run_as": "nkrishne@cisco.com",
+                      "skip_execution": false,
+                      "task_id": "$activity.definition_activity_01A6HWECEIC643tTG1sjkhHS5GQ4DS7Aqly.output.query_result[0].task_id$",
+                      "task_properties": [
+                        {
+                          "property_name": "approval_message",
+                          "value": "Trying to updated task which is in COMPLETED state. \nUpdated after Querying for COMPLETED state activity."
+                        }
+                      ],
+                      "task_type": "task.approval"
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01A6HWEU4O5FQ06beQehAnRun5K0ylGQS6T",
+            "name": "Parallel Branch",
+            "title": "Task State --\u003e Pending",
+            "type": "logic.parallel_block",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Task State --\u003e Pending",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01A6HWF08KH1C5OFjiur4XujDA4eo0Eqm8s",
+                "name": "Create Approval Request",
+                "title": "Create Approval Request Task from Automation WF -  3rd Task",
+                "type": "task.approval_request",
+                "base_type": "activity",
+                "properties": {
+                  "approval_choices": [
+                    "Approve",
+                    "Reject",
+                    "Option1",
+                    "Option2"
+                  ],
+                  "assignees": [
+                    "$workflow.definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC.input.variable_workflow_01A6HW5AWZBY72TBCYNaL1FbJ0SEMtj6vME$",
+                    "vspancha@cisco.com"
+                  ],
+                  "continue_on_failure": false,
+                  "description": "This is used to update a task which is in status --  \nPENDING",
+                  "display_name": "Create Approval Request Task from Automation WF -  3rd Task",
+                  "due_date": {
+                    "is_relative_time": true,
+                    "relative_time": {
+                      "duration": 15,
+                      "time_units": "days"
+                    },
+                    "set_due_date": true
+                  },
+                  "expiration_date": {
+                    "is_relative_time": true,
+                    "is_specified_date": true,
+                    "relative_time": {
+                      "duration": 15,
+                      "time_units": "days"
+                    },
+                    "specified_date": "$activity.01A65MMVCTOHG323FtMl2lOLJurCOD4qxyz.output.result$"
+                  },
+                  "expiration_status": "$workflow.definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC.static.variable_workflow_01A6HW5AWZMZO26NybFTDKU1x81MS5Rcllv$",
+                  "minimum_approvals": 2,
+                  "priority": "high",
+                  "skip_execution": false,
+                  "subject_line": "$workflow.definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC.static.variable_workflow_01A6HW5AWZG362vsi8PMGyQ7aWDbRmx9713$",
+                  "task_message": "1. $workflow.definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC.static.variable_workflow_01A6HW5AWZHZI1oANNq9uIVDow4foqZR9RM$.\n\nTask Created on \"$activity.01A65MMVCTOHG323FtMl2lOLJurCOD4qxyz.output.start_time$\"",
+                  "task_owner": "$workflow.definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC.input.variable_workflow_01A6HW5AWZJTU1wgfo0MxL3Q4f32XricNkS$",
+                  "task_requestor": "$workflow.definition_workflow_01A6HW4IGD04I1FwYc8IKWg3cU2nYOQmFtC.input.variable_workflow_01A6HW5AWZLGN5l7KHfDN10jf6FQrsT5ozF$"
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01A6HWFBHLSW115L20YS6pvWe9VwbsGnLwo",
+                "name": "Generic CCS API Request",
+                "title": "Approve the Task to bring to Pending state",
+                "type": "ccs.api_request",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "api_body": "{\n  \"message\": \"Approve Selected from Automation user1, one more pending\",\n  \"response\": \"Approve\"\n}",
+                  "api_call_method": "POST",
+                  "continue_on_failure": false,
+                  "display_name": "Approve the Task to bring to Pending state",
+                  "relative_url": "be-console/api/v1/tasks/$activity.definition_activity_01A6HWF08KH1C5OFjiur4XujDA4eo0Eqm8s.output.task_id$/action",
+                  "runtime_user": {
+                    "override_target_runtime_user": false,
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "override_workflow_target": true,
+                    "target_id": "definition_target_01f9IQgvQRJv3tvlqwR145Bbrye0toH0Q"
+                  }
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01A6HWFJVDW247D8mBoP0IGMnAdqpfWuuwo",
+                "name": "Group",
+                "title": "NEXTG-13935 Update Task which is in \"PENDING\" state",
+                "type": "logic.group",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "NEXTG-13935 Update Task which is in \"PENDING\" state",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01A6HWFS4HBTS2dfj0kAoAFOmZW9KouHujm",
+                    "name": "Query Object",
+                    "title": "Query Object -- Pending",
+                    "type": "task.query_object",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "criteria": {
+                        "left_operand": {
+                          "left_operand": {
+                            "left_operand": "$tasktype.task approval.output.status.state$",
+                            "operator": "eq",
+                            "right_operand": "pending"
+                          },
+                          "operator": "or",
+                          "right_operand": {
+                            "left_operand": "$tasktype.task approval.output.type$",
+                            "operator": "eq",
+                            "right_operand": "task.approval"
+                          }
+                        },
+                        "operator": "and",
+                        "right_operand": {
+                          "left_operand": "$tasktype.task approval.output.task_id$",
+                          "operator": "eq",
+                          "right_operand": "$activity.definition_activity_01A6HWF08KH1C5OFjiur4XujDA4eo0Eqm8s.output.task_id$"
+                        }
+                      },
+                      "display_name": "Query Object -- Pending",
+                      "query_object": {
+                        "query_task": true,
+                        "task_type": "task.approval"
+                      },
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01A6HWFZJFQWW6nCr1t73V6WANdkpJu1T0f",
+                    "name": "Update Task",
+                    "title": "Update Task which is in Pending state",
+                    "type": "task.update_task",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Update Task which is in Pending state",
+                      "run_as": "nkrishne@cisco.com",
+                      "skip_execution": false,
+                      "task_id": "$activity.definition_activity_01A6HWFS4HBTS2dfj0kAoAFOmZW9KouHujm.output.query_result[0].task_id$",
+                      "task_properties": [
+                        {
+                          "property_name": "approval_message",
+                          "value": "Updated task which is in PENDING state. \nUpdated after Querying for PENDING state activity."
+                        }
+                      ],
+                      "task_type": "task.approval"
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01A6HWG78N36L6pcrd1GxlereS2GOdVfWIu",
+                    "name": "Sleep",
+                    "title": "Sleep 2 Sec - Time to update the status",
+                    "type": "core.sleep",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Sleep 2 Sec - Time to update the status",
+                      "skip_execution": false,
+                      "sleep_interval": 2
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01A6HWGD4CRL03zjBAB5Jk7tCODjSp3lBPx",
+                    "name": "Query Object",
+                    "title": "Query Object - To check if the status still remains in PENDING",
+                    "type": "task.query_object",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "criteria": {
+                        "left_operand": {
+                          "left_operand": "$tasktype.task approval.output.task_id$",
+                          "operator": "eqi",
+                          "right_operand": "$activity.definition_activity_01A6HWFZJFQWW6nCr1t73V6WANdkpJu1T0f.output.task_id$"
+                        },
+                        "operator": "and",
+                        "right_operand": {
+                          "left_operand": "$tasktype.task approval.output.status.state$",
+                          "operator": "mregex",
+                          "right_operand": "pend.*"
+                        }
+                      },
+                      "display_name": "Query Object - To check if the status still remains in PENDING",
+                      "query_object": {
+                        "query_task": true,
+                        "task_type": "task.approval"
+                      },
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_019I5NZCEWCCJ4QSPTOx7FKtWtqUc4gg3Oi",
+      "category_019I5OAZVUMC01UjE6v80uQqPAlvac21Uei"
+    ]
+  },
+  "categories": {
+    "category_019I5NZCEWCCJ4QSPTOx7FKtWtqUc4gg3Oi": {
+      "unique_name": "category_019I5NZCEWCCJ4QSPTOx7FKtWtqUc4gg3Oi",
+      "name": "NK Automation Final",
+      "title": "NK Automation Final",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    },
+    "category_019I5OAZVUMC01UjE6v80uQqPAlvac21Uei": {
+      "unique_name": "category_019I5OAZVUMC01UjE6v80uQqPAlvac21Uei",
+      "name": "NK Automation Draft",
+      "title": "NK Automation Draft",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  }
+}
