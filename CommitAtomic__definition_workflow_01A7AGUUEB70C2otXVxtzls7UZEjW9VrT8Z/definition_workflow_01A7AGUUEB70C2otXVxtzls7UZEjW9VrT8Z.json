@@ -92,11 +92,51 @@
             "object_type": "definition_activity"
           }
         ]
+      },
+      {
+        "unique_name": "definition_activity_01A7BMYDWNTHI1dGb6uLNZaHDZQKRxTQWbc",
+        "name": "CA Atomic overwrite",
+        "title": "CA Atomic overwrite",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "display_name": "CA Atomic overwrite",
+          "input": {
+            "variable_workflow_01A6KL8YVG9692Os2DA4XOENQ6pC9DM0ygM": ""
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "target": {
+            "no_target": true
+          },
+          "workflow_id": "definition_workflow_01A6JUKYEJAYH3kBrTkYgsXgjynPyVQOjY0"
+        },
+        "object_type": "definition_activity"
       }
     ],
     "categories": [
       "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
     ]
+  },
+  "targets": {
+    "definition_target_015BYI133FAY70x33jEwZ59TgqBIYLJ1J6j": {
+      "unique_name": "definition_target_015BYI133FAY70x33jEwZ59TgqBIYLJ1J6j",
+      "name": "CA Internal",
+      "title": "CA Internal",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "disable_certificate_validation": true,
+        "display_name": "CA Internal",
+        "host": "10.88.38.127",
+        "no_runtime_user": true,
+        "path": "/orch-ui/api/v1",
+        "port": 30091,
+        "protocol": "http"
+      }
+    }
   },
   "variables": {
     "variable_01951J6S6W7C93Bs1YUe4sUZGbZR9lldsiC": {
@@ -126,5 +166,8 @@
       "base_type": "datatype",
       "object_type": "tabletype"
     }
-  }
+  },
+  "atomic_workflows": [
+    "definition_workflow_01A6JUKYEJAYH3kBrTkYgsXgjynPyVQOjY0"
+  ]
 }
