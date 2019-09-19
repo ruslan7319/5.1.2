@@ -40,6 +40,53 @@
           "sleep_interval": 1
         },
         "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01A7AOJM2DM6Y6DbI4FxjweR3f4DM3b1Q88",
+        "name": "Condition Block",
+        "title": "Condition Block",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Condition Block",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01A7AOJOVOA3J1Wv6lW1QJjFCMLfwMzVpOd",
+            "name": "Condition Branch",
+            "title": "Condition Branch",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "",
+                "operator": "eq",
+                "right_operand": ""
+              },
+              "display_name": "Condition Branch"
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01A7AOJQ5L38R1XY1XFXkdqusdUgFdVURAr",
+            "name": "Condition Branch",
+            "title": "Condition Branch",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "",
+                "operator": "eq",
+                "right_operand": ""
+              },
+              "display_name": "Condition Branch"
+            },
+            "object_type": "definition_activity"
+          }
+        ]
       }
     ],
     "categories": [
