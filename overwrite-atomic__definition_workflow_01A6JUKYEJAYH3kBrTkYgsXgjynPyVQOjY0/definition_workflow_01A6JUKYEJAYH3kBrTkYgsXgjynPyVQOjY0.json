@@ -1,0 +1,294 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01A6JUKYEJAYH3kBrTkYgsXgjynPyVQOjY0",
+    "name": "CA- Atomic",
+    "title": "CA- Atomic",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "local",
+          "name": "Boolean",
+          "type": "datatype.boolean",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01A6JW34TN6LS6bH05FElhUvtdPlM3DU4E4",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.number",
+        "properties": {
+          "value": 5.5,
+          "scope": "local",
+          "name": "decimal",
+          "type": "datatype.number",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01A6JWCH8UGHB33nrY1SRzcaJPAlpQl1Nlj",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 55,
+          "scope": "local",
+          "name": "Integer",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01A6JWLIR9H7M2vSelQ4doFtjYWPBgLhgt5",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "value": "*****",
+          "scope": "local",
+          "name": "Secure String",
+          "type": "datatype.secure_string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01A6JWVMUWI9O3xDY1MOff0PJfRdB1Rz31Y",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "localoutput variable",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01A6KFIFCALXP1idOm2JOL6HfF492UdJI1z",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Locl Input",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01A6KL8YVG9692Os2DA4XOENQ6pC9DM0ygM",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "abc",
+          "scope": "local",
+          "name": "String",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01A6JVUSAEFML1CmhFVXzoARNg4giBP7uTi",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "ca",
+        "is_atomic": true
+      },
+      "delete_workflow_instance": true,
+      "display_name": "CA- Atomic",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01A6KXSZ86CF51pyghiXPDE6YFjNpV26KZr",
+        "name": "Non-Atomic used by",
+        "title": "Non-Atomic used by",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Non-Atomic used by",
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_015BYI133FAY70x33jEwZ59TgqBIYLJ1J6j",
+            "target_type": "web-service.endpoint"
+          },
+          "workflow_id": "definition_workflow_01A68NZQG1W170C06JgZBRx4FUyZKuK1dLu"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01A6JUSS3Y4824cQ7G5270AkaM69Ee4bHZt",
+        "name": "To Lower",
+        "title": "To Lower",
+        "type": "core.string2lower",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "To Lower",
+          "skip_execution": false,
+          "source": "$workflow.definition_workflow_01A6JUKYEJAYH3kBrTkYgsXgjynPyVQOjY0.local.variable_workflow_01A6JVUSAEFML1CmhFVXzoARNg4giBP7uTi$"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01A6JXF7RRO2849aXJEdweVWl3IUdWXbmzz",
+        "name": "Sleep",
+        "title": "Sleep",
+        "type": "core.sleep",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Sleep",
+          "skip_execution": false,
+          "sleep_interval": "$workflow.definition_workflow_01A6JUKYEJAYH3kBrTkYgsXgjynPyVQOjY0.local.variable_workflow_01A6JWLIR9H7M2vSelQ4doFtjYWPBgLhgt5$"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01A6JYFGU68CF4Go10NbTGhDt72r9wZa2mX",
+        "name": "Set Variables",
+        "title": "Set Variables",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set Variables",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01A6JUKYEJAYH3kBrTkYgsXgjynPyVQOjY0.output.variable_workflow_01A6KFIFCALXP1idOm2JOL6HfF492UdJI1z$",
+              "variable_value_new": "$activity.definition_activity_01A6JXF7RRO2849aXJEdweVWl3IUdWXbmzz.output.succeeded$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01A6JZG1MPDR42yu2pciXjPebghSxHcso0d",
+        "name": "Condition Block",
+        "title": "Condition Block",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": true,
+          "display_name": "Condition Block",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01A6JZG4NLMM01Tz7JCkGHaT5ttpsbTB6FK",
+            "name": "Condition Branch",
+            "title": "Boolean",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01A6JUKYEJAYH3kBrTkYgsXgjynPyVQOjY0.local.variable_workflow_01A6JW34TN6LS6bH05FElhUvtdPlM3DU4E4$",
+                "operator": "ne",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "Boolean",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01A6K1OG3LPU20aMfuxgOg4BITu0Z67rvrw",
+                "name": "Convert Json to Xml",
+                "title": "Convert Json to Xml",
+                "type": "core.json2xml",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Convert Json to Xml",
+                  "input_json": "{\"namre\":\"cisco\"}",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01A6JZG615VZ52QvVnVCP5d78o0TQsi91uZ",
+            "name": "Condition Branch",
+            "title": "decimal",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01A6JUKYEJAYH3kBrTkYgsXgjynPyVQOjY0.local.variable_workflow_01A6JWCH8UGHB33nrY1SRzcaJPAlpQl1Nlj$",
+                "operator": "eq",
+                "right_operand": 5.5
+              },
+              "continue_on_failure": false,
+              "display_name": "decimal",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01A6K1HBNTG9M5zNcC2G8wYBi26EjDalBWQ",
+                "name": "Convert Json to Xml",
+                "title": "Convert Json to Xml",
+                "type": "core.json2xml",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Convert Json to Xml",
+                  "input_json": "{\"namre\":\"cisco\"}",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_015BYI133FAY70x33jEwZ59TgqBIYLJ1J6j": {
+      "unique_name": "definition_target_015BYI133FAY70x33jEwZ59TgqBIYLJ1J6j",
+      "name": "CA Internal",
+      "title": "CA Internal",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "disable_certificate_validation": true,
+        "display_name": "CA Internal",
+        "host": "10.88.38.127",
+        "no_runtime_user": true,
+        "path": "/orch-ui/api/v1",
+        "port": 30091,
+        "protocol": "http"
+      }
+    }
+  },
+  "atomic_workflows": [
+    "definition_workflow_01A68NZQG1W170C06JgZBRx4FUyZKuK1dLu"
+  ]
+}
