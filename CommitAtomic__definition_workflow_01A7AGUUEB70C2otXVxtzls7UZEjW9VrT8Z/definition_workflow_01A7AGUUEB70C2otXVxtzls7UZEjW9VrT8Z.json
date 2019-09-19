@@ -62,11 +62,13 @@
             "base_type": "activity",
             "properties": {
               "condition": {
-                "left_operand": "",
+                "left_operand": "$global.variable_0195ROX85DKAD6cnsr5W3UMpWFuwE7S89lL.global.variable_0195ROX85DKAD6cnsr5W3UMpWFuwE7S89lL$",
                 "operator": "eq",
-                "right_operand": ""
+                "right_operand": "12"
               },
-              "display_name": "Condition Branch"
+              "continue_on_failure": false,
+              "display_name": "Condition Branch",
+              "skip_execution": false
             },
             "object_type": "definition_activity"
           },
@@ -78,11 +80,13 @@
             "base_type": "activity",
             "properties": {
               "condition": {
-                "left_operand": "",
+                "left_operand": "$global.variable_01951J6S6W7C93Bs1YUe4sUZGbZR9lldsiC.global.variable_01951J6S6W7C93Bs1YUe4sUZGbZR9lldsiC[0].123$",
                 "operator": "eq",
-                "right_operand": ""
+                "right_operand": "33"
               },
-              "display_name": "Condition Branch"
+              "continue_on_failure": true,
+              "display_name": "Condition Branch",
+              "skip_execution": true
             },
             "object_type": "definition_activity"
           }
@@ -92,5 +96,45 @@
     "categories": [
       "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
     ]
+  },
+  "variables": {
+    "variable_01951J6S6W7C93Bs1YUe4sUZGbZR9lldsiC": {
+      "unique_name": "variable_01951J6S6W7C93Bs1YUe4sUZGbZR9lldsiC",
+      "schema_id": "tabletype_01951J0I5OYTB5a4fEdFTw28WXIcB5XCn1W",
+      "properties": {
+        "scope": "global",
+        "name": "cntest",
+        "type": "datatype.table",
+        "is_required": false
+      },
+      "object_type": "variable"
+    },
+    "variable_0195ROX85DKAD6cnsr5W3UMpWFuwE7S89lL": {
+      "unique_name": "variable_0195ROX85DKAD6cnsr5W3UMpWFuwE7S89lL",
+      "properties": {
+        "value": "0001-01-01T00:00:00+00:00",
+        "scope": "global",
+        "name": "aaa",
+        "type": "datatype.date",
+        "is_required": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "table_types": {
+    "tabletype_01951J0I5OYTB5a4fEdFTw28WXIcB5XCn1W": {
+      "unique_name": "tabletype_01951J0I5OYTB5a4fEdFTw28WXIcB5XCn1W",
+      "data_type": "datatype.tabletype",
+      "display_name": "123",
+      "columns": [
+        {
+          "name": "123",
+          "title": "333",
+          "type": "string"
+        }
+      ],
+      "base_type": "datatype",
+      "object_type": "tabletype"
+    }
   }
 }
