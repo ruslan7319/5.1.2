@@ -8,9 +8,10 @@
     "variables": null,
     "properties": {
       "atomic": {
-        "is_atomic": false
+        "atomic_group": "Atomic",
+        "is_atomic": true
       },
-      "delete_workflow_instance": false,
+      "delete_workflow_instance": true,
       "description": "test",
       "display_name": "RUSLAN-ATOMIC",
       "runtime_user": {
